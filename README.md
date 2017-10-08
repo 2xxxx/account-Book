@@ -1,5 +1,5 @@
 # calendar
-[preview](https://2xxxx.github.io/account-Book/index.html)
+[preview](https://2xxxx.github.io/account-Book/dist/index.html)
 > A Vue.js project
 
 ## Build Setup
