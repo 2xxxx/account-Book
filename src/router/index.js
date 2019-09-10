@@ -6,70 +6,41 @@ import Category from '@/components/Category'
 import Detail from '@/components/Detail'
 import Addevent from '@/components/Addevent'
 import Chart from '@/components/Chart'
+import Hello from '@/components/Hello'
 
 Vue.use(Router)
-var addItem="";
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [
-    //  {
-    //    path: '/Home',
-    //    name: 'Home',
-    //    component: Home
-    // },{
-    //     path:'/Category',
-    //    name:'Category',
-    //    component:Category,
-    //    children:[
-    //      {path:'/Category/List',name:'List',component:List},
-    //      {path:'/Category/Addevent',name:'Addevent',component:Addevent}
-    //    ]
-    // },{
-    //     path:'/Detail',
-    //     name:'Detail',
-    //     component:Detail,
-    //     children:[
-    //       {path:'/Detail/Chart',name:'Chart',component:Chart}
-    //     ]
-    //   }
-     
-
     {
-       path: '/',
-       name: 'Home',
-       component: Home
+      path: '/',
+      name: 'Hello',
+      component: Hello
     }, {
-       path:'/List',
-       name:'List',
-       component:List
+      path: '/List',
+      name: 'List',
+      component: List
     }, {
-       path:'/Category',
-       name:'Category',
-       component:Category,
-       beforeEnter:(to,from,next)=>{
-       
-         next(vm=>{
-          vm.$http.get('url').then((res)=>{
-            
-          })
-         })
-       }
+      path: '/Home',
+      name: 'Home',
+      component: Home
     }, {
-      path:'/Detail/:ty',
-      name:'Detail',
-      component:Detail,
-      beforeEach :(to,from,next)=>{
-        window.location.reload();
-      }
+      path: '/Category',
+      name: 'Category',
+      component: Category
     }, {
-      path:'/Addevent',
-      name:'Addevent',
-      component:Addevent
+      path: '/Detail',
+      name: 'Detail',
+      component: Detail
     }, {
-      path:'/Chart',
-      name:'Chart',
-      component:Chart
+      path: '/Addevent',
+      name: 'Addevent',
+      component: Addevent
+    }, {
+      path: '/Chart',
+      name: 'Chart',
+      component: Chart
     }
     
   ]

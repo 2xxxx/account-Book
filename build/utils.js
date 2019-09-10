@@ -9,26 +9,80 @@ exports.assetsPath = function (_path) {
   return path.posix.join(assetsSubDirectory, _path)
 }
 
+// exports.cssLoaders = function (options) {
+//   options = options || {}
+
+//   var cssLoader = {
+//     loader: 'css-loader',
+//     options: {
+//       minimize: process.env.NODE_ENV === 'production',
+//       sourceMap: options.sourceMap
+//     }
+//   }
+//   var px2remLoader = {
+//     loader: 'px2rem-loader',
+//     options: {
+//       remUnit: 75
+//     }
+//   }
+
+//   // generate loader string to be used with extract text plugin
+//   function generateLoaders (loader, loaderOptions) {
+//     var loaders = [cssLoader,px2remLoader]
+//     if (loader) {
+//       loaders.push({
+//         loader: loader + '-loader',
+//         options: Object.assign({}, loaderOptions, {
+//           sourceMap: options.sourceMap
+//         })
+//       })
+//     }
+
+//     // Extract CSS when that option is specified
+//     // (which is the case during production build)
+//     if (options.extract) {
+//       return ExtractTextPlugin.extract({
+//         use: loaders,
+//         fallback: 'vue-style-loader'
+//       })
+//     } else {
+//       return ['vue-style-loader'].concat(loaders)
+//     }
+//   }
+
+//   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
+//   return {
+//     css: generateLoaders(),
+//     postcss: generateLoaders(),
+//     less: generateLoaders('less'),
+//     sass: generateLoaders('sass', { indentedSyntax: true }),
+//     scss: generateLoaders('sass'),
+//     stylus: generateLoaders('stylus'),
+//     styl: generateLoaders('stylus')
+//   }
+// }
+
 exports.cssLoaders = function (options) {
   options = options || {}
 
-  var cssLoader = {
+  const cssLoader = {
     loader: 'css-loader',
     options: {
       minimize: process.env.NODE_ENV === 'production',
       sourceMap: options.sourceMap
     }
   }
-  var px2remLoader = {
-    loader: 'px2rem-loader',
+
+  var postcssLoader = {
+    loader: 'postcss-loader',
     options: {
-      remUnit: 75
+      sourceMap: options.sourceMap
     }
   }
 
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
-    var loaders = [cssLoader,px2remLoader]
+    const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
     if (loader) {
       loaders.push({
         loader: loader + '-loader',
@@ -50,6 +104,12 @@ exports.cssLoaders = function (options) {
     }
   }
 
+  const stylusOptions = {
+    'resolve url': true,
+    // 这里 新增 import 配置项，指向自定义主题文件
+    import: [path.resolve(__dirname, '../src/style/theme')]
+  }
+
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
@@ -57,8 +117,8 @@ exports.cssLoaders = function (options) {
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
     scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    stylus: generateLoaders('stylus',stylusOptions),
+    styl: generateLoaders('stylus',stylusOptions)
   }
 }
 

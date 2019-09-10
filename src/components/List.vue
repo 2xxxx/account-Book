@@ -1,8 +1,8 @@
 <template>
     <div class="list">
-        <img src="http://localhost:8000/assets/image/back.png" @click="listDel" alt="">
+        <i class="cubeic-back" @click="listDel"></i>
         <p>{{ListItem.sign}}</p>
-        <img class="img" :src="imgSrc" alt=""/>
+        <i class="img" :class="imgSrc"></i>
         <span @click="listAdd">完成</span>
         <ul class="ListAdd">
             <li><label for="remark"> 款项：</label><input type="text" id="remark" v-model="ListItem.remark"></li>
