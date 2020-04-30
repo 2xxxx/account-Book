@@ -17,7 +17,7 @@
     "cropper": "^3.0.0",
     "css-loader": "^0.28.11",
     "cube-ui": "^1.12.30",
-    "jquery": "^3.2.1",
+    "jquery": "^3.5.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "lib-flexible": "^0.3.2",
